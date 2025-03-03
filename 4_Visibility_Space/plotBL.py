@@ -83,7 +83,7 @@ def makecubeplot(u,v,w):
     Vb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][1].flatten() + 0.5*(v.max()+v.min())
     Wb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][2].flatten() + 0.5*(w.max()+w.min())
     for ub, vb, wb in zip(Ub, Vb, Wb):
-        ax.plot([ub], [vb], [wb], 'w')
+        plt.plot([ub], [vb], [wb], 'w')
 
 def UV(u,v,w):
     fig=plt.figure(figsize=(8,8))
@@ -180,7 +180,7 @@ def baseline_angles(antennaPosition,lamb):
     for i in range(na):
         for j in range(i+1, na):
             length_angle[k,0] = lamb**(-1)*np.sqrt((antennaPosition[i,0]-antennaPosition[j,0])**2 + (antennaPosition[i,1]-antennaPosition[j,1])**2)
-            length_angle[k,1] = np.arctan2((antennaPosition[i,1]-antennaPosition[j,1]) , (antennaPosition[i,0]-antennaPosition[j,0]))
+            length_angle[k,1] = np.arctan2((antennaPosition[i,0]-antennaPosition[j,0]) , (antennaPosition[i,1]-antennaPosition[j,1]))
             k = k +1
     return length_angle
 
@@ -228,7 +228,7 @@ def plotuv(antennaPos,L,dec,h,Ntimes,lamb):
     plt.ylabel('v (klambda)')
     plt.title('uv coverage')
     mb = maxuv*1.1 #5*np.sqrt((uv**2).sum(1)).max()
-    plt.axes().set_aspect('equal')
+    plt.gca().set_aspect('equal')
     plt.xlim(-mb,mb)
     plt.ylim(-mb,mb)
     #plt.show()
